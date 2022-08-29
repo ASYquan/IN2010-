@@ -1,22 +1,20 @@
 import numpy as np
 
 
-def binary(n):
+def unique_search(n):
     """
     n : amount
 
-    x : the number that is not in the range 
+    x : the number that is not in the range
     A : random Array from range [0, n-1]
     """
     sample = list(range(0, n))
-    A = np.random.choice(np.arange(0, n), replace = False, size = n - 1)
-    print(A)
-    print(sample)
-    for i in range(0, len(sample)-1):
+    cp = sample.copy()
+    A = np.random.choice(np.arange(0, n), replace=False, size=n - 1)
+    for i in range(0, len(A) + 1):
         if sample[i] in A:
-            arr = np.delete(A, i)
-    print(arr)
-    return A
+            cp.remove(sample[i])
+    return cp[-1]
 
 
 print(binary(9))

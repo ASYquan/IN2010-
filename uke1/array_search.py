@@ -2,28 +2,30 @@ import numpy as np
 
 
 def array_count(A):
+    A = A.T
     n = np.shape(A)[0]
-    m = np.shape(A)[1]
-    column = 0
-    largest_amnt = [0, 0]
-    count = [0, column]
+    best_ones, best_column = (0, 0)
+    count_ones, column_count = (0, 0)
     i = 0
     while True:
-        if A[column, i] == 1:
-            count[0] += 1
+        print(A[column_count, i])
+        if A[column_count, i] == 1:
+            count_ones += 1
             i += 1
-        elif A[column, i] == 0:
-            column += 1
+        elif A[column_count, i] == 0:
+            if count_ones > best_ones:
+                best_ones = count_ones
+                best_column = column_count
+            column_count += 1
             i = 0
-            if count[0] > largest_amnt[0]:
-                largest_amnt = count
+            if column_count == n-1:
+                return best_column + 1
+                break
 
-        elif column == m:
-            return largest_amnt
-            break
+ 
 
-
-A = np.matrix([[0, 1, 0], [0, 0, 0], [0, 0, 0]])
-print(A[0, 1])  # Her er problemet
+#A = np.matrix([[0, 1, 0], [0, 0, 0], [0, 0, 0]])
+A = np.matrix([[0, 0, 1, 0], [0, 0, 1, 0], [0, 0, 1,0], [0,0,0,0]])
+#print(A)
 print(A)
-print(array_count(A))
+print("best_column:" ,array_count(A))

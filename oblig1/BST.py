@@ -8,9 +8,12 @@ class Node:
 		self.height = 0
 
 
-class AVL:
+class Set:
+    def __init__(self):
+        self.size = 0
     """
-    We assume a balanced tree as an input 
+    The code is written such that it only works correctly and intended when used 
+    on a balanced BST.  
     """
 	def insert(self, v, x):
 		"""
@@ -23,12 +26,17 @@ class AVL:
 		"""
         if v == None:
             Node = Node(x)
-            Node.height += 1 
+            self.size += 1
+
         elif (x < v.element):
             v.left = self.insert(v.left, x)
+
         elif (x > v.element):
             v.right = self.insert(v.right, x)
-    return v
+
+        v.height = 1 + max((v.left).height, (v.right).height)
+        #return self. balance(v)
+        
 
     def contains(self, v, x):
     """
@@ -57,7 +65,7 @@ class AVL:
         else:
             return False 
 
-    def findMin(v):
+    def findMin(self, v):
         """
         Tries to find the smallest node-child of the input-node given
         args:
@@ -71,7 +79,7 @@ class AVL:
             current = current.left 
         return current 
 
-    def remove(v, x):
+    def remove(self, v, x):
         """
         args:
             v: a input node
@@ -84,21 +92,26 @@ class AVL:
             return None
 
         elif x < v.element:
-            v.left = remove(v.left, x)
-            return v 
+            v.left = self.remove(v.left, x)
+ 
         elif x > v.element:
-            v.right = remove(v.right, x)
-            return v 
+            v.right = self.remove(v.right, x)
 
         elif v.left == None:
-            return v.right 
-        elif v.right == None: 
-            return v.left 
+            v = v.right 
 
-        u = self.findMin(v)
-        v.element = u.element 
-        v.right = remove(v.right, u.element)
-        return v 
+        elif v.right == None: 
+            v = v.left 
+        else:
+            u = self.findMin(v)
+            v.element = u.element 
+            v.right = self.remove(v.right, u.element)
+        v.height = 1 + max((v.left).height, (v.right).height)
+        self.size -= 1
+
+    def size(self):
+        return self.size
+
 
 
 

@@ -177,3 +177,9 @@ s.insert(s.root_node, 2)
 s.remove(s.root_node, 2)
 s.inorder(s.root_node)
 """
+
+"""
+ python3 BST.py < inputs/example | cmp - outputs/example
+
+
+"""

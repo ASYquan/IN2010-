@@ -34,4 +34,15 @@ if __name__ == "__main__":
     init_tree = [None] * 101
     cats = int(input())
     start_of_file()
-    print(get_cat(cats, init_tree))
+    # print(get_cat(cats, init_tree))
+
+    output_str = ""
+    for val in get_cat(cats, init_tree):
+        output_str += str(val) + " "
+    print(output_str)
+
+# notat: som i teque.py er kitty_test.txt en fil jeg lagde for å teste input.
+"""
+python3 kitty.py < kitty_test.txt
+14 19 23 24 25
+"""
